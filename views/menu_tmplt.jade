@@ -1,0 +1,48 @@
+div(ng-controller="userCtrl", ng-init="__init__()")
+	//add a toolbar or whatever here and after that
+	//inject all the other views here
+	div#nav
+		h2 GardenRed
+		br
+		br
+		br
+		#hiddennav
+			btn.btn-default.btn(dropdown='')
+					a.dropdownLink(href='#', dropdown-toggle='') Select menu
+						b.caret
+					ul.dropdown-menu
+						li 
+							a(ng-class="('info'===thisState)?'activeNav':''" ui-sref="menu.info()") Dashboard	
+						li 
+							a(ng-click="" ng-class="('stats'===thisState)?'activeNav':''" ui-sref="menu.devices()") Device List
+							hr
+						li
+							a(ng-class="('edit'===thisState)?'activeNav':''" ui-sref="menu.edit()") Edit Info
+						li
+							a(ng-click="logout()" href='#')
+								span Logout	
+
+		#visiblenav
+			ul
+				li 
+					a(ng-class="('info'===thisState)?'activeNav':''" ui-sref="menu.info()") Dashboard	
+				li 
+					a(ng-click="" ng-class="('stats'===thisState)?'activeNav':''" ui-sref="menu.devices()") Device List
+					hr
+				li
+					a(ng-class="('edit'===thisState)?'activeNav':''" ui-sref="menu.edit()") Edit Info
+				li
+					br
+					br
+
+					a(ng-click="logout()" href='#')
+						span Logout	
+				li
+					br
+					br
+					hr
+					p.copyrightNav Copyright &copy; 2016 GardenRed
+
+		
+
+	#menu_results(ui-view="")

@@ -1,0 +1,55 @@
+////////////////////////////////////////////////////////////////
+//////////AUTHORS :   chocof (https://github.com/chocof) //////
+//////////File    :   views/basic_tmplt.jade       ////////////
+////////////////////////////////////////////////////////////////
+
+doctype 
+html(ng-app='gardenRed')
+head
+	title GardenRed
+	
+	//Appearance stuff for dem feels
+	link(href="/bootstrap/dist/css/bootstrap.min.css", rel="stylesheet", type="text/css")    
+	link(href="/c3/c3.css", rel="stylesheet", type="text/css")    
+	link(rel='stylesheet', href='/font-awesome/css/font-awesome.min.css')
+	link(rel="stylesheet" ,type="text/css", href="/reveal-highlight-themes/styles/monokai_sublime.css" id="highlight-theme")
+	link(rel="stylesheet" type="text/css" href="/notie/dist/notie.css")
+	//Our styles
+	style
+		include styles/body.css
+	
+
+	//Very bootstrap 
+	script(src="/jquery/dist/jquery.min.js")
+	script(src="/bootstrap/dist/js/bootstrap.js")
+
+	//WOW Much Angular
+	script(src='/angular/angular.min.js')
+	script(src='/angular-bootstrap/ui-bootstrap-tpls.min.js')
+	script(src="/angular-cookies/angular-cookies.min.js")
+	script(src="/angular-resource/angular-resource.js")
+
+	//ui router to handle routing
+	script(src='/angular-ui-router/release/angular-ui-router.min.js')
+	
+	//for creating graphs
+	script(src="/d3/d3.min.js", charset="utf-8")
+	script(src="/c3/c3.min.js")
+
+	//for notifications
+	script(src='/notie/dist/notie.min.js')
+	
+	//Main App 
+	script(src='/js/app/app.js')
+	
+	//services
+	script(src='/js/services/sig_log_srvc.js')
+	script(src='/js/services/userSrvc.js')
+
+	//controllers
+	script(src='/js/controllers/startCtrl.js')
+	script(src='/js/controllers/userCtrl.js')
+	base(href='/')
+body
+	//inject other views here
+	div(ui-view)

@@ -1,0 +1,94 @@
+div(ng-init="setState('devices')")
+	div#cont
+
+		.col-md-6
+			div(ng-show="!deviceSelect")
+
+				h1 Device List
+				br
+				btn.btn-primary.btn-lg(dropdown='')
+					a.dropdownLink(href='#', dropdown-toggle='') Select Device
+						b.caret
+					ul.dropdown-menu
+						li(role="menuitem" ng-repeat="device in device_list_names")
+							a(ng-click='getDeviceStats(device)') {{device}}
+			div(ng-show="deviceSelect")
+
+				h3 
+					i(class="fa fa-male") 
+					&nbsp;Device Details : {{deviceSelect}}
+					br
+					input.btn.btn-default.btn-md(ng-click='reset_sel()' value='Return' type='submit' style='width:200px')
+				br
+				div(id="tempGraph")
+				br
+				div(id="moistGraph")
+				div(class="alert alert-info")
+					p Maximum Moisture Lower Bound : {{deviceResults.max_moist}}%
+					p Medium Moisture Lower Bound :	{{deviceResults.med_moist}}%
+					p Water Period : {{deviceResults.water_period}} days
+					p Data Send Interval Period : {{deviceResults.water_period}} min
+					p Last Watering : {{deviceResults.history | date : "yyyy-MM-dd HH:mm:ss"}}
+				br
+				input.btn.btn-info.btn-md(ng-click='getDeviceStats(deviceSelect)' value='Refresh' type='refresh' style='width:200px')
+				br
+				br
+				input.btn.btn-info.btn-md(ng-show="!editDevBool" ng-click='editDevBool = true' value='Edit' type='edit' style='width:200px')
+				form(ng-show="editDevBool === true")
+					div(class="col-md-8 editLabels")
+						h3(class='palette2') Set Maximum Moisture Lower Bound :
+						input.form-control(type='text',name="max_moist", placeholder='Maximum Moisture Lower Bound',ng-model='edit_dev.max_moist')
+						h3(class='palette2') Set Medium Moisture Lower Bound :
+						input.form-control(type='text',name="med_moist", placeholder='Medium Moisture Lower Bound',ng-model='edit_dev.med_moist')
+						h3(class='palette2') Set Watering Period (days) :
+						input.form-control(type='text',name="water_interval", placeholder='Watering Period',ng-model='edit_dev.water_period')
+						h3(class='palette2') Set Data Send Interval Period (minutes) :
+						input.form-control(type='text',name="data_interval", placeholder='Data Send Interval Period',ng-model='edit_dev.data_period')
+						br
+						input.btn.btn-default.btn-lg(ng-click='editDevice()' value='Edit Device' type='submit' style='width:200px')
+						br 
+						input.btn.btn-default.btn-lg(ng-click='editDevBool = false' value='Cancel Edit' type='submit' style='width:200px')
+
+		.col-md-6
+			
+			div(ng-show="!addDeviceFlag && !deviceSelect")
+				h1 Devices
+				input.btn.btn-default.btn-lg(ng-click='showDeviceForm()' value='+ Add New Device' type='submit' style='width:200px')
+			div(ng-show="addDeviceFlag && !deviceSelect")
+				h1 Devices
+				br
+				br
+				form()
+					div(class="col-md-8 editLabels")
+						h3 
+							i(class="fa fa-male") 
+							&nbsp;Set RaspberryPi Device Info
+							p.infoSub(style='margin-top:0px!important') Name and MAC address are required. The rest are optional.
+							p.infoSub(style='margin-top:0px!important') For moisture values beyond Max Moisture Lower Bound watering lasts 5 seconds. (default : 70 %)
+							p.infoSub(style='margin-top:0px!important') For moisture values beyond Medium Moisture Lower Bound watering lasts 10 seconds. (default : 50 %)
+							p.infoSub(style='margin-top:0px!important') For lower moisture values watering lasts 15 seconds
+						
+
+						h3(class='palette2') Set Name :
+						input.form-control(type='text',name="name", placeholder='Device Unique Name',ng-model='device.name')
+
+						h3(class='palette2') Set MacAddress :
+						input.form-control(type='text',name="mac_address", placeholder='Device Mac Address',ng-model='device.mac_address')
+
+						h3(class='palette2') Set Maximum Moisture Lower Bound :
+						input.form-control(type='text',name="max_moist", placeholder='Set Maximum Moisture Lower Bound',ng-model='device.max_moist')
+	
+						h3(class='palette2') Set Medium Moisture Lower Bound :
+						input.form-control(type='text',name="med_moist", placeholder='Medium Moisture Lower Bound',ng-model='device.med_moist')
+
+						h3(class='palette2') Set Watering Period (days) :
+						input.form-control(type='text',name="water_interval", placeholder=' Watering Period',ng-model='device.water_period')
+							
+						h3(class='palette2') Set Data Send Interval Period (minutes) :
+						input.form-control(type='text',name="data_interval", placeholder='Data Send Interval',ng-model='device.data_period')
+							
+						br
+						input.btn.btn-default.btn-lg(ng-click='addDevice()' value='Add new Device' type='submit' style='width:200px') 
+						input.btn.btn-default.btn-lg(ng-click='showDeviceForm()' value='Cancel' type='submit' style='width:200px')
+
+	

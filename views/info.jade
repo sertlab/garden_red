@@ -1,0 +1,33 @@
+div(ng-init="setState('info')")
+	div#cont
+		.col-md-6.info
+
+			h1 Info
+			p.infoSub Your account information. Change it 
+				a(href='/user/edit') Here
+
+			h3  Username : {{user.username}}
+			h3  Email : {{user.email}}
+			h3  Name : {{user.name}}
+			h3  Surname : {{user.surname}}
+
+			br
+			br
+			br
+				
+		.col-md-6
+
+			h2 About GardenRed
+
+			br
+			p GardenRed uses new IoT technologies to help you monitor and water your plants. Basic equipment is consisted of a RaspberryPi device, a number of Arduino Devices as well as sensors. Default configuration stands with TelosB sensors. 
+			br
+			p Everything is glued together through Node-Red.
+
+			.col-md-6
+				img(src="/img/nodered.png" alt="NodeRed" height="100" width="100")
+			.col-md-6
+				img(src="/img/arduino.png" alt="Arduino" height="100" width="100")
+			.col-md-6
+				img(src="/img/rasp.png" alt="RaspberryPi" height="100" width="100")
+	
